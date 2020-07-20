@@ -1,0 +1,110 @@
+.header {
+    background-color: black;
+    height: 100px;
+    width: 100%;
+    position: static;
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.split {
+    height: 540px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+}
+
+.left {
+    background-color: teal;
+    flex: 65%;
+    left: 0px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: white;
+    text-decoration: solid;
+}
+
+.right {
+    background-color: thistle;
+    flex: 35%;
+    right: 0px;
+    align-content: center;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.footer {
+    height: 50px;
+    color: whitesmoke;
+    background-color: black;
+    position: static;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    background-color: indianred;
+    padding: 0px;
+    grid-template-columns: auto auto auto;
+    width: 340px;
+    height: 340px;
+    align-self: center;
+    align-content: center;
+}
+
+.grid-item {
+    background-color: blanchedalmond;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+}
+
+.grid-item:hover {
+    background-color: rgb(207, 166, 241);
+    cursor: pointer;
+}
+
+.grid-item:active {
+    background-color: rgb(207, 166, 241);
+}
+
+a:link {
+    font-weight: bold;
+    font-style: italic;
+    color:  lightskyblue;
+}
+
+a:visited {
+    color: rgb(252, 223, 57);;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+button {
+    width: 37%;
+    height: 70px;
+    font-size: 20px;
+    background-color: rgb(75, 75, 75);
+    color: mintcream;
+    border: 3px solid rgba(180, 250, 211, 0.767);
+    border-radius: 15px 40px;
+}
+
+button:hover {
+    background-color: rgba(161, 160, 160, 0.685);
+    cursor: auto;
+}
