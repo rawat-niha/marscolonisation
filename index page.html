@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>For Checking!</title>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="header" style="vertical-align: middle;">
+        <h1>TIC TAC TOE</h1>
+        <h6 style="font-family: cursive; font-style: italic;">Powered by Mars Rover Entertainment Sytstems</h6>
+    </div>
+
+    <div class="split">
+        <!--This is the right section : PLAY SECTION-->
+        <div class="left">
+            <p>
+                <h1 id="heading"></h1>
+                <h3 id="LevelHeading"></h3>
+            </p>
+            <div class="grid-container" style="vertical-align: middle; align-self: center;">
+                <div class="grid-item" id="b1"></div>
+                <div class="grid-item" id="b2"></div>
+                <div class="grid-item" id="b3"></div>
+                <div class="grid-item" id="b4"></div>
+                <div class="grid-item" id="b5"></div>
+                <div class="grid-item" id="b6"></div>
+                <div class="grid-item" id="b7"></div>
+                <div class="grid-item" id="b8"></div>
+                <div class="grid-item" id="b9"></div>
+            </div>
+        </div>
+
+        <!--This is the left section : MENU SECTION-->
+        <div class="right">
+            <div id="mode" style="vertical-align: middle;">
+                <h1>Select Opponent.</h1>
+                <button type="button" id="personplayer">Person</button>
+                <button type="button" id="AI">Computer</button>
+            </div>
+
+            <div id="level">
+                <button type="button" id="easy">BEGINNER</button><br>
+                <button type="button" id="medium">INTERMEDIATE</button><br>
+                <button type="button" id="hard">PRO</button><br>
+            </div>
+
+            <h1 id="status"></h1><br>
+            <button id="back2" type="button">Back to level selection</button> <br>
+            <button id="back1" type="button">Back to Mode selection</button><br>
+            <button id="reset" type="button">Reset Game</button><br>
+            
+
+        </div>
+    </div>
+    <div class="footer" style="vertical-align: middle;">
+        <p style="font-style: italic;"> Designed with love by <a href="https://www.linkedin.com/in/niharika-rawat-0a7564137/">Rawat-Nira</a></p> 
+    </div> 
+
+
+
+
+
+
+    <script src="new script.js"></script>
+
+</body>
+
+</html>
