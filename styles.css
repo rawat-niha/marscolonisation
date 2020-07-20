@@ -69,6 +69,8 @@ body {
     text-align: center;
     height: 100px;
     width: 100px;
+    color: black;
+    font-size: xx-large;
 }
 
 .grid-item:hover {

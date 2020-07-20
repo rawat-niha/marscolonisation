@@ -36,6 +36,7 @@ $("#back1").click(function () {
     $("#status").hide();
     setheading("", "");
     mode_selected = "";
+    reset();
 });
 
 $("#AI").click(function () {
@@ -70,9 +71,10 @@ $("#back2").click(function () {
     $("#reset").hide();
     $("#status").hide();
     setheading("", "");
+    reset();
 });
 
-$("#reset").click(function () {
+function reset() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).innerHTML = "";
         document.getElementById("b" + i).style.cursor = "pointer";
@@ -83,7 +85,7 @@ $("#reset").click(function () {
     } else {
         computer();
     }
-});
+}
 
 $("#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9").click(function () {
     if (mode_selected == "human") {
