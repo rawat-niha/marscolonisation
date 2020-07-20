@@ -174,8 +174,8 @@ function evaluate() {
 }
 
 function draw() {
-    for(var i = 0; i < 10; i++) {
-        if(document.getElementById('b' + i).innerHTML == ""){
+    for(var i = 1; i < 10; i++) {
+        if(document.getElementById("b" + i).innerHTML == ""){
             break;
         }
     }
