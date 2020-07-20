@@ -87,9 +87,9 @@ $("#reset").click(function () {
 
 $("#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9").click(function () {
     if (mode_selected == "human") {
-        humanClick();
+        humanClick(this);
     } else if (mode_selected == "computer") {
-        AIclick();
+        AIclick(this);
     }
     this.style.cursor = "no-drop";
 })
@@ -126,6 +126,20 @@ function setheading(givenheading, givenlevel) {
 
 function humanClick(clicked) {
 
+    if(!evaluate() && !draw()) {
+        if(clicked.innerHTML != "") {
+            document.getElementById('status').innerHTML = "Already filled!";
+        } else {
+            clicked.innerHTML = current_player;
+            if(current_player == 'X' && !evaluate() && !draw()) {
+                current_player = 'O';
+                document.getElementById('status').innerHTML = current_player + "'s turn.";
+            } else if(current_player == 'O' && !evaluate() && !draw()) {
+                current_player = 'X';
+                document.getElementById('status').innerHTML = current_player + "'s turn.";
+            }
+        }
+    }
 }
 
 function disable_all() {
@@ -146,16 +160,40 @@ function evaluate() {
         equalTriplet(1, 4, 7) || equalTriplet(2, 5, 8) || equalTriplet(3, 6, 9) ||
         equalTriplet(1, 5, 9) || equalTriplet(3, 5, 7)) {
             if(mode_selected == "computer") {
-                
+                if(current_player == 'X') {
+                    document.getElementById('status').innerHTML = "Congratulations! You won.";
+                } else {
+                    document.getElementById('status').innerHTML = "Sorry, you lose!";
+                }
+            } else {
+                document.getElementById('status').innerHTML = "Congratulations! " + current_player + " won.";
             }
+            return true;
         }
+        return false;
+}
+
+function draw() {
+    for(var i = 0; i < 10; i++) {
+        if(document.getElementById('b' + i).innerHTML == ""){
+            break;
+        }
+    }
+    if(i == 10) {
+        document.getElementById('status').innerHTML = "Match DRAW!!";
+        return true;
+    }
+    return false;
 }
 
 function equalTriplet(x, y, z) {
-    var Xv = document.getElementById("b" + x).innerHTML;
-    var Yv = document.getElementById("b" + y).innerHTML;
-    var Zv = document.getElementById("b" + z).innerHTML;
+    let Xv = document.getElementById("b" + x).innerHTML;
+    let Yv = document.getElementById("b" + y).innerHTML;
+    let Zv = document.getElementById("b" + z).innerHTML;
 
-    if (Xv == current_player && Yv == current_player && Zv == current_player) return true;
-    else return false;
+    if (Xv == current_player && Yv == current_player && Zv == current_player) {
+        return true;
+    } else {
+        return false;
+    }
 }
