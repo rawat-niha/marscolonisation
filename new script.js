@@ -111,9 +111,34 @@ function computer() {
     if (Math.random() < 0.5) {
         document.getElementById("status").innerHTML = "Computer starts the game!";
         current_player = comp;
+
+        disable_all();
+
+        setTimeout(function() {
+            computer_move()
+        }, 700);
+
     } else {
         document.getElementById('status').innerHTML = "You start the game!";
         current_player = hum;
+    }
+}
+
+function AIclick(clicked) {
+    if(!evaluate() && !draw()) {
+        if (clicked.innerHTML != "") {
+            document.getElementById('status').innerHTML = "Already filled!";
+        } else {
+            clicked.innerHTML = current_player;
+            if (current_player == hum && !evaluate() && !draw()) {
+                current_player = comp;
+                document.getElementById('status').innerHTML = "Computer's turn.";
+                disable_all();
+                setTimeout(function() {
+                    computer_move();
+                }, 1000);
+            }
+        }
     }
 }
 
@@ -162,7 +187,7 @@ function evaluate() {
         equalTriplet(1, 4, 7) || equalTriplet(2, 5, 8) || equalTriplet(3, 6, 9) ||
         equalTriplet(1, 5, 9) || equalTriplet(3, 5, 7)) {
             if(mode_selected == "computer") {
-                if(current_player == 'X') {
+                if(current_player == hum) {
                     document.getElementById('status').innerHTML = "Congratulations! You won.";
                 } else {
                     document.getElementById('status').innerHTML = "Sorry, you lose!";
@@ -199,3 +224,38 @@ function equalTriplet(x, y, z) {
         return false;
     }
 }
+
+function computer_move() {
+    
+    if (level_selected == 'BEGINNER') {
+        beginner();
+    } else if (level_selected == 'INTERMEDIATE') {
+        intermediate();
+    } else if (level_selected == 'PRO') {
+        hard();
+    }
+
+    if (!evaluate() && !draw()) {
+        document.getElementById('status').innerHTML = "Your turn!";
+        current_player = hum;
+    }
+    for(var i = 1; i < 10; i++) {
+        document.getElementById('b' + i).style.cursor = 'pointer';
+    }
+
+}
+
+function getrandompos() {
+    var num = Math.floor((Math.random() * 9) + 1);
+    return document.getElementById('b' + num);
+}
+
+function beginner() {
+    myBox = getrandompos();
+    while(myBox.innerHTML != "") {
+        myBox = getrandompos();
+    }
+
+    myBox.innerHTML = comp;
+}
+
