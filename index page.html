@@ -4,7 +4,6 @@
 <head>
     <title>For Checking!</title>
     <meta charset="utf-8" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -19,8 +18,8 @@
         <!--This is the right section : PLAY SECTION-->
         <div class="left">
             <p>
-                <h1 id="heading"></h1>
-                <h3 id="LevelHeading"></h3>
+                <h1 id="heading">Welcome!</h1>
+                <h3 id="LevelHeading">"    "</h3>
             </p>
             <div class="grid-container" style="vertical-align: middle; align-self: center;">
                 <div class="grid-item" id="b1"></div>
@@ -52,7 +51,7 @@
             <h1 id="status"></h1><br>
             <button id="back2" type="button">Back to level selection</button> <br>
             <button id="back1" type="button">Back to Mode selection</button><br>
-            <button id="reset" type="button">Reset Game</button><br>
+            <button id="reset" type="button" onclick="reset();">Reset Game</button><br>
             
 
         </div>
@@ -65,7 +64,7 @@
 
 
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="new script.js"></script>
 
 </body>
