@@ -187,7 +187,9 @@ function evaluate() {
         equalTriplet(1, 4, 7) || equalTriplet(2, 5, 8) || equalTriplet(3, 6, 9) ||
         equalTriplet(1, 5, 9) || equalTriplet(3, 5, 7)) {
             if(mode_selected == "computer") {
+
                 if(current_player == hum) {
+
                     document.getElementById('status').innerHTML = "Congratulations! You won.";
                 } else {
                     document.getElementById('status').innerHTML = "Sorry, you lose!";
@@ -258,4 +260,3 @@ function beginner() {
 
     myBox.innerHTML = comp;
 }
-
