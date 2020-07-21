@@ -62,8 +62,7 @@ body {
     height: 340px;
     align-self: center;
     align-content: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
 }
 
 .grid-item {
