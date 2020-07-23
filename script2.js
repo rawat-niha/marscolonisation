@@ -99,7 +99,9 @@ function computer_move() {
         current_player = hum;
     }
     for(var i = 1; i < 10; i++) {
-        document.getElementById('b' + i).style.cursor = 'pointer';
+        if (document.getElementById('b' + i).innerHTML == "") {
+            document.getElementById('b' + i).style.cursor = "pointer";
+        }
     }
 
 }
@@ -197,37 +199,5 @@ function winTriplet(a, b, c) {
         return true;
     } else { 
         return false;
-    }
-}
-
-function minimax(){
-    
-}
-
-function RWtoNum(r, w) {
-    if(r == 0) {
-        if(col == 0) {
-            return 1;
-        } else if(col == 1) {
-            return 2;
-        } else if(col == 2) {
-            return 3;
-        }
-    } else if(r == 1) {
-        if(col == 0) {
-            return 4;
-        } else if(col == 1) {
-            return 5;
-        } else if(col == 2) {
-            return 6;
-        }
-    } else if(r == 2) {
-        if(col == 0) {
-            return 7;
-        } else if(col == 1) {
-            return 8;
-        } else if(col == 2) {
-            return 9;
-        }
     }
 }

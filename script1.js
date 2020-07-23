@@ -50,9 +50,10 @@ $("#AI").click(function () {
     $("#back2").hide();
     $("#reset").hide();
     $("#status").hide();
+    document.getElementById('heading').innerHTML = 'Let\'s Play!!';
 });
 
-$("#easy, #medium, #hard").click(function () {
+$("#easy, #medium, #hard, #minimax").click(function () {
     enable_all();
     $("#mode").hide();
     $("#level").hide();
@@ -74,7 +75,7 @@ $("#back2").click(function () {
     $("#back2").hide();
     $("#reset").hide();
     $("#status").hide();
-    setheading("", "");
+    setheading("Let's play!!", "");
     level_selected = "";
     mode_selected = "";
     
@@ -104,7 +105,7 @@ $("#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9").click(function () {
         AIclick(this);
     }
     this.style.cursor = "no-drop";
-})
+});
 
 function human() {
     if (Math.random() < 0.5) {
@@ -126,7 +127,7 @@ function computer() {
 
         setTimeout(function() {
             computer_move()
-        }, 700);
+        }, 400);
 
     } else {
         document.getElementById('status').innerHTML = "You start the game!";
@@ -173,7 +174,7 @@ function AIclick(clicked) {
                 disable_all();
                 setTimeout(function() {
                     computer_move();
-                }, 1000);
+                }, 300);
             }
         }
     }
