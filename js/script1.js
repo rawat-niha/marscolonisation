@@ -168,7 +168,7 @@ function computer() {
 
         setTimeout(function() {
             computer_move()
-        }, 400);
+        }, 700);
 
     } else {
         document.getElementById('status').innerHTML = "You start the game!";
@@ -227,7 +227,7 @@ function AIclick(clicked) {
                 disable_all();
                 setTimeout(function() {
                     computer_move();
-                }, 300);
+                }, 500);
             }
         }
     }
