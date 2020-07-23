@@ -92,6 +92,8 @@ function computer_move() {
         intermediate();
     } else if (level_selected == 'PRO') {
         hard();
+    } else if (level_selected == 'UNBEATABLE') {
+        best_move();
     }
 
     if (!evaluate() && !draw()) {
@@ -199,5 +201,106 @@ function winTriplet(a, b, c) {
         return true;
     } else { 
         return false;
+    }
+}
+
+function best_move() {
+
+    if (first_move()) {
+        let arr = [0, 2, 4, 6, 8];
+        let spNum = Math.floor(Math.random() * arr.length);
+        board[arr[spNum]] = comp;
+        spNum = arr[spNum] + 1;
+        document.getElementById('b' + spNum).innerHTML = comp;
+        return;
+    } else if (compute(board) == null) {
+
+        let bestScore = -Infinity;
+        let move = 0;
+
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === "") {
+                board[i] = comp;
+                let score = minimax(board, 0, false);
+                board[i] = "";
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    move = i;
+                }
+            }
+        }
+        board[move] = comp;
+        move++;
+        document.getElementById('b' + move).innerHTML = comp;
+    }
+
+}
+
+function first_move() {
+    let check;
+    for (let i = 0; i < 9; i++) {
+        if (board[i] == "") check = true;
+        else {check = false; break;}
+    }
+    return check;
+}
+
+function minimax(newBoard, depth, isAI) {
+    let result = compute(newBoard);
+    if (result != null) {
+        return theScores[result];
+    }
+
+    if (isAI) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (newBoard[i] == "") {
+                newBoard[i] = comp;
+                let score = minimax(newBoard, depth + 1, false) - depth;
+                newBoard[i] = "";
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (newBoard[i] == "") {
+                newBoard[i] = hum;
+                let score = minimax(newBoard, depth + 1, true) + depth;
+                newBoard[i] = "";
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+function compute(board) {
+    let winner = null;
+
+    if (board[0] == board[1] && board[1] == board[2] && board[0] != "") winner = board[0];
+    else if (board[3] == board[4] && board[4] == board[5] && board[3] != "") winner = board[3];
+    else if (board[6] == board[7] && board[7] == board[8] && board[6] != "") winner = board[6];
+
+    else if (board[0] == board[3] && board[3] == board[6] && board[0] != "") winner = board[0];
+    else if (board[1] == board[4] && board[4] == board[7] && board[1] != "") winner = board[1];
+    else if (board[2] == board[5] && board[5] == board[8] && board[2] != "") winner = board[2];
+
+    else if (board[0] == board[4] && board[4] == board[8] && board[0] != "") winner = board[0];
+    else if (board[2] == board[4] && board[4] == board[6] && board[2] != "") winner = board[2];
+
+    let openSpots = 0;
+    for (let i = 0; i < 9; i++) {
+        if (board[i] == "") {
+            openSpots++;
+        }
+    }
+
+    if (winner == null && openSpots == 0) {
+        return "tie";
+    } else {
+        return winner;
     }
 }

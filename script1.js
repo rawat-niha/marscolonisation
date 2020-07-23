@@ -1,9 +1,17 @@
-var level_selected;
-var mode_selected;
-var comp = "X";
-var hum = "O";
-var winner;
-var current_player;
+let level_selected;
+let mode_selected;
+let comp = "X";
+let hum = "O";
+let winner;
+let current_player;
+
+let board = ["", "", "", "", "", "", "", "", ""];
+
+let theScores = {
+    X: 10,
+    O: -10,
+    tie: 0
+};
 
 $(document).ready(function () {
     $("#mode").show();
@@ -68,6 +76,11 @@ $("#easy, #medium, #hard, #minimax").click(function () {
 });
 
 $("#back2").click(function () {
+    if(level_selected == 'UNBEATABLE') {
+        for(let i = 0; i < 9; i++) {
+            board[i] = "";
+        }
+    }
     disable_all();
     $("#mode").hide();
     $("#level").show();
@@ -89,6 +102,12 @@ function reset() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).innerHTML = "";
         document.getElementById("b" + i).style.cursor = "pointer";
+    }
+
+    if(level_selected == 'UNBEATABLE') {
+        for(let i = 0; i < 9; i++) {
+            board[i] = "";
+        }
     }
 
     if (mode_selected == "human") {
@@ -189,5 +208,11 @@ function disable_all() {
 function enable_all() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).style.cursor = "pointer";
+    }
+}
+
+function toBoard(number) {
+    if(mode_selected === 'computer' && level_selected === "UNBEATABLE") {
+        board[number] = hum;
     }
 }
