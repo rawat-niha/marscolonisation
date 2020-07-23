@@ -13,6 +13,7 @@ let theScores = {
     tie: 0
 };
 
+/* Shows the options for mode selection when page is loaded. */
 $(document).ready(function () {
     $("#mode").show();
     $("#level").hide();
@@ -23,6 +24,7 @@ $(document).ready(function () {
     disable_all();
 });
 
+/* Shows gaming mode for human vs human. */
 $("#personplayer").click(function () {
     enable_all();
     $("#mode").hide();
@@ -34,6 +36,7 @@ $("#personplayer").click(function () {
     mode_selected = "human";
 });
 
+/* Button to go back to mode selection. */
 $("#back1").click(function () {
     disable_all();
     $("#mode").show();
@@ -51,6 +54,7 @@ $("#back1").click(function () {
     }
 });
 
+/* Shows the level selection window for human vs AI agent. */
 $("#AI").click(function () {
     $("#mode").hide();
     $("#level").show();
@@ -61,6 +65,7 @@ $("#AI").click(function () {
     document.getElementById('heading').innerHTML = 'Let\'s Play!!';
 });
 
+/* Defines the after-effects of pressing level selection buttons. */
 $("#easy, #medium, #hard, #minimax").click(function () {
     enable_all();
     $("#mode").hide();
@@ -75,6 +80,7 @@ $("#easy, #medium, #hard, #minimax").click(function () {
     setheading("Human vs Computer", "Level: " + this.innerHTML);
 });
 
+/* Button to go back to level selection. */
 $("#back2").click(function () {
     if(level_selected == 'UNBEATABLE') {
         for(let i = 0; i < 9; i++) {
@@ -98,6 +104,11 @@ $("#back2").click(function () {
     }
 });
 
+/**
+ * Resets the grid and the board array. Restarts the game of same level and mode.
+ * @param {void} no parameter
+ * @return {void} nothing
+ */
 function reset() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).innerHTML = "";
@@ -117,6 +128,7 @@ function reset() {
     }
 }
 
+/* Defines the after-effects of clicking a grid cell */
 $("#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9").click(function () {
     if (mode_selected == "human") {
         humanClick(this);
@@ -126,6 +138,11 @@ $("#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9").click(function () {
     this.style.cursor = "no-drop";
 });
 
+/**
+ * Randomly selects who starts in human vs human mode and sets it as current_player.
+ * @param {void}
+ * @returns {void}
+ */
 function human() {
     if (Math.random() < 0.5) {
         document.getElementById("status").innerHTML = "X starts the game!";
@@ -137,6 +154,11 @@ function human() {
 
 }
 
+/**
+ * Randomly selects who starts in human vs computer mode and sets it as current_player.
+ * @param {void}
+ * @returns {void}
+ */
 function computer() {
     if (Math.random() < 0.5) {
         document.getElementById("status").innerHTML = "Computer starts the game!";
@@ -154,15 +176,22 @@ function computer() {
     }
 }
 
+/* Sets the selected level for easy navigation. */
 function setlevel(selectedlevel) {
     level_selected = selectedlevel;
 }
 
+/* Sets the heading and subheading according to what has to be displayed baove the grid. */
 function setheading(givenheading, givenlevel) {
     document.getElementById("heading").innerHTML = givenheading;
     document.getElementById("LevelHeading").innerHTML = givenlevel;
 }
 
+/**
+ * Takes the id of the clicked grid cell in human vs human mode and displays accordingly.
+ * @param {id} clicked 
+ * @returns {void}
+ */
 function humanClick(clicked) {
 
     if(!evaluate() && !draw()) {
@@ -181,6 +210,11 @@ function humanClick(clicked) {
     }
 }
 
+/**
+ * Takes id of the clicked grid cell in human vs computer mode and displays/evaluates accordingly.
+ * @param {id} clicked 
+ * @returns {void}
+ */
 function AIclick(clicked) {
     if(!evaluate() && !draw()) {
         if (clicked.innerHTML != "") {
@@ -199,18 +233,25 @@ function AIclick(clicked) {
     }
 }
 
+/* Disables all the grid cells */
 function disable_all() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).style.cursor = "no-drop";
     }
 }
 
+/* Enables all the grid cells. */
 function enable_all() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).style.cursor = "pointer";
     }
 }
 
+/**
+ * Takes up a number according to the grid cell clicked and updates the value in the board array if the level is unbeatable.
+ * @param {integer} number 
+ * @returns {void}
+ */
 function toBoard(number) {
     if(mode_selected === 'computer' && level_selected === "UNBEATABLE") {
         board[number] = hum;

@@ -1,3 +1,6 @@
+/**
+ * Makes the move for AI in beginner level.
+ */
 function beginner() {
     myBox = getrandompos();
     while(myBox.innerHTML != "") {
@@ -7,6 +10,9 @@ function beginner() {
     myBox.innerHTML = comp;
 }
 
+/**
+ * Makes the move for AI in intermediate mode.
+ */
 function intermediate() {
     if(checkCombo()) {
         return;
@@ -20,7 +26,9 @@ function intermediate() {
     }
 }
 
-//Other method for hard
+/**
+ * Makes the move for AI in hard mode.
+ */
 function hard() {
     if(checkCombo()) {
         return;
@@ -38,6 +46,11 @@ function hard() {
     }
 }
 
+/**
+ * Evaluates if there is any winner in the current board state.
+ * @returns {boolean}
+ * true if a winner is found, false otherwise.
+ */
 function evaluate() {
 
     if (equalTriplet(1, 2, 3) || equalTriplet(4, 5, 6) || equalTriplet(7, 8, 9) ||
@@ -59,6 +72,11 @@ function evaluate() {
         return false;
 }
 
+/**
+ * Checks for a situtation of tie.
+ * @returns {boolean}
+ * returns true if it is a tie else false.
+ */
 function draw() {
     for(var i = 1; i < 10; i++) {
         if(document.getElementById("b" + i).innerHTML == ""){
@@ -72,6 +90,15 @@ function draw() {
     return false;
 }
 
+/**
+ * Takes three integer values and checks if the values inside the 
+ * respective grid cells are equal and also equal to the current player. 
+ * @param {integer} x 
+ * @param {integer} y 
+ * @param {integer} z 
+ * 
+ * @returns {boolean} true if all three are equal, else false.
+ */
 function equalTriplet(x, y, z) {
     let Xv = document.getElementById("b" + x).innerHTML;
     let Yv = document.getElementById("b" + y).innerHTML;
@@ -84,6 +111,9 @@ function equalTriplet(x, y, z) {
     }
 }
 
+/**
+ * Initiates the move by the AI agent according to the level selected.
+ */
 function computer_move() {
     
     if (level_selected == 'BEGINNER') {
@@ -108,11 +138,16 @@ function computer_move() {
 
 }
 
+/* Gets a random position on the grid. */
 function getrandompos() {
     var num = Math.floor((Math.random() * 9) + 1);
     return document.getElementById('b' + num);
 }
 
+/**
+ * Checks for vertical, horizontal and diagonal directions if a triplet
+ * combination can be formed resulting in win.
+ */
 function checkCombo() {
     for (var j = 1; j <= 3; j++) {
         if (tripletcheck(j, j + 3, j + 3, j + 6, j)) {
@@ -145,6 +180,14 @@ function checkCombo() {
     return false;
 }
 
+/**
+ * Passes three different positions which can result in a win and checks if it is possible.
+ * @param {integer} a 
+ * @param {integer} b 
+ * @param {integer} c 
+ * @param {integer} tofill (position which is to be filled)
+ * @param {integer} isblank (position to be checked for blank.)
+ */
 function tripletcheck(a, b, c, tofill, isblank) {
     if(equalTriplet(a,b,c) && (document.getElementById('b'+tofill).innerHTML == "") && (document.getElementById('b'+isblank) != "")) {
         current_player = comp;
@@ -154,6 +197,9 @@ function tripletcheck(a, b, c, tofill, isblank) {
     return false;
 }
 
+/**
+ * Checks for horizontal, vertical and diagonal triplet by depth two if win is possible.
+ */
 function try_for_win() {
     if(winTriplet(9,5,1)) return true;
     if(winTriplet(7,5,3)) return true;
@@ -187,6 +233,14 @@ function try_for_win() {
 
 }
 
+/**
+ * Takes up three different positions on the grid which cam result in a win. Fills the empty places.
+ * @param {integer} a 
+ * @param {integer} b 
+ * @param {integer} c 
+ * 
+ * @returns {boolean} true if the position can be filled. False otherwise.
+ */
 function winTriplet(a, b, c) {
     let p = document.getElementById('b'+a);
     let q = document.getElementById('b'+b);
@@ -204,6 +258,9 @@ function winTriplet(a, b, c) {
     }
 }
 
+/**
+ * Makes the move for AI in unbeatable mode. Initiates MiniMax algorithm.
+ */
 function best_move() {
 
     if (first_move()) {
@@ -237,6 +294,7 @@ function best_move() {
 
 }
 
+/* Checks if AI agent is making the first move in unbeatable mode. */
 function first_move() {
     let check;
     for (let i = 0; i < 9; i++) {
@@ -246,6 +304,14 @@ function first_move() {
     return check;
 }
 
+/**
+ * Implements the MiniMax algorithm to find the best move in optimal play.
+ * @param {array} newBoard 
+ * @param {integer} depth 
+ * @param {boolean} isAI 
+ * 
+ * @returns {integer} theScores[...]
+ */
 function minimax(newBoard, depth, isAI) {
     let result = compute(newBoard);
     if (result != null) {
@@ -277,6 +343,10 @@ function minimax(newBoard, depth, isAI) {
     }
 }
 
+/**
+ * Takes up the board state and returns if there is a winner or a tie or none.
+ * @param {array} board 
+ */
 function compute(board) {
     let winner = null;
 
