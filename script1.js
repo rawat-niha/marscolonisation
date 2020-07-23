@@ -1,9 +1,17 @@
-var level_selected;
-var mode_selected;
-var comp = "X";
-var hum = "O";
-var winner;
-var current_player;
+let level_selected;
+let mode_selected;
+let comp = "X";
+let hum = "O";
+let winner;
+let current_player;
+
+let board = ["", "", "", "", "", "", "", "", ""];
+
+let theScores = {
+    X: 10,
+    O: -10,
+    tie: 0
+};
 
 $(document).ready(function () {
     $("#mode").show();
@@ -50,9 +58,10 @@ $("#AI").click(function () {
     $("#back2").hide();
     $("#reset").hide();
     $("#status").hide();
+    document.getElementById('heading').innerHTML = 'Let\'s Play!!';
 });
 
-$("#easy, #medium, #hard").click(function () {
+$("#easy, #medium, #hard, #minimax").click(function () {
     enable_all();
     $("#mode").hide();
     $("#level").hide();
@@ -67,6 +76,11 @@ $("#easy, #medium, #hard").click(function () {
 });
 
 $("#back2").click(function () {
+    if(level_selected == 'UNBEATABLE') {
+        for(let i = 0; i < 9; i++) {
+            board[i] = "";
+        }
+    }
     disable_all();
     $("#mode").hide();
     $("#level").show();
@@ -74,7 +88,7 @@ $("#back2").click(function () {
     $("#back2").hide();
     $("#reset").hide();
     $("#status").hide();
-    setheading("", "");
+    setheading("Let's play!!", "");
     level_selected = "";
     mode_selected = "";
     
@@ -88,6 +102,12 @@ function reset() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).innerHTML = "";
         document.getElementById("b" + i).style.cursor = "pointer";
+    }
+
+    if(level_selected == 'UNBEATABLE') {
+        for(let i = 0; i < 9; i++) {
+            board[i] = "";
+        }
     }
 
     if (mode_selected == "human") {
@@ -104,7 +124,7 @@ $("#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9").click(function () {
         AIclick(this);
     }
     this.style.cursor = "no-drop";
-})
+});
 
 function human() {
     if (Math.random() < 0.5) {
@@ -126,7 +146,7 @@ function computer() {
 
         setTimeout(function() {
             computer_move()
-        }, 700);
+        }, 400);
 
     } else {
         document.getElementById('status').innerHTML = "You start the game!";
@@ -173,7 +193,7 @@ function AIclick(clicked) {
                 disable_all();
                 setTimeout(function() {
                     computer_move();
-                }, 1000);
+                }, 300);
             }
         }
     }
@@ -188,5 +208,11 @@ function disable_all() {
 function enable_all() {
     for (let i = 1; i < 10; i++) {
         document.getElementById("b" + i).style.cursor = "pointer";
+    }
+}
+
+function toBoard(number) {
+    if(mode_selected === 'computer' && level_selected === "UNBEATABLE") {
+        board[number] = hum;
     }
 }
