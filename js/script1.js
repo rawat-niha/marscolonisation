@@ -254,6 +254,8 @@ function enable_all() {
  */
 function toBoard(number) {
     if(mode_selected === 'computer' && level_selected === "UNBEATABLE") {
-        board[number] = hum;
+        if(board[number] == "") {
+            board[number] = hum;
+        } else return;
     }
 }
