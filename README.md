@@ -16,4 +16,5 @@ Along with the unbeatable AI agent, I added different modes to the game. A 'Huma
 
 The project is hosted on 000webhost.com
 
-# The link to the project: https://ms-tictactoe.000webhostapp.com/
+# The link to the project: 
+https://ms-tictactoe.000webhostapp.com/
